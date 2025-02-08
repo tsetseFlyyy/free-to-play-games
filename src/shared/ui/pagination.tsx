@@ -1,3 +1,9 @@
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+} from "@radix-ui/react-icons";
 import { Button } from "./button";
 import {
   Select,
@@ -8,13 +14,12 @@ import {
 } from "./select";
 
 export function Pagination({ table }) {
-  console.log("table", table);
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-5 ml-auto w-fit mr-10">
       <div className="flex items-center gap-2">
         <p>На странице</p>
         <Select
-        //   value={String(table.getRowModel().rows.length)}
+          //   value={String(table.getRowModel().rows.length)}
           onValueChange={(value) => table.setPageSize(value)}
         >
           <SelectTrigger className="w-[180px]">
@@ -40,7 +45,7 @@ export function Pagination({ table }) {
           onClick={() => table.firstPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          First page
+          <DoubleArrowLeftIcon className="h-4 w-4" />
         </Button>
         <Button
           variant="outline"
@@ -48,7 +53,7 @@ export function Pagination({ table }) {
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          <ChevronLeftIcon className="h-4 w-4" />
         </Button>
         <Button
           variant="outline"
@@ -56,7 +61,7 @@ export function Pagination({ table }) {
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          <ChevronRightIcon className="h-4 w-4" />
         </Button>
         <Button
           variant="outline"
@@ -64,7 +69,7 @@ export function Pagination({ table }) {
           onClick={() => table.lastPage()}
           disabled={!table.getCanNextPage()}
         >
-          Last page
+          <DoubleArrowRightIcon className="h-4 w-4" />
         </Button>
       </div>
     </div>

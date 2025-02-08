@@ -14,6 +14,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/ui/select";
 import { Button } from "@/shared/ui/button";
 import { useNavigate } from "@tanstack/react-router";
 import { Pagination } from "@/shared/ui/pagination";
@@ -24,9 +33,76 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
+const platformsOptions = [
+  { value: "pc", label: "PC" },
+  { value: "browser", label: "Web Browser" },
+  { value: "all", label: "All" },
+];
+
+const genresOptions = [
+  { value: "mmorpg", label: "MMORPG" },
+  { value: "shooter", label: "Shooter" },
+  { value: "strategy", label: "Strategy" },
+  { value: "moba", label: "MOBA" },
+  { value: "racing", label: "Racing" },
+  { value: "sports", label: "Sports" },
+  { value: "social", label: "Social" },
+  { value: "sandbox", label: "Sandbox" },
+  { value: "open-world", label: "Open World" },
+  { value: "survival", label: "Survival" },
+  { value: "pvp", label: "PvP" },
+  { value: "pve", label: "PvE" },
+  { value: "pixel", label: "Pixel" },
+  { value: "voxel", label: "Voxel" },
+  { value: "zombie", label: "Zombie" },
+  { value: "turn-based", label: "Turn-Based" },
+  { value: "first-person", label: "First Person" },
+  { value: "third-person", label: "Third Person" },
+  { value: "top-down", label: "Top Down" },
+  { value: "tank", label: "Tank" },
+  { value: "space", label: "Space" },
+  { value: "sailing", label: "Sailing" },
+  { value: "side-scroller", label: "Side Scroller" },
+  { value: "superhero", label: "Superhero" },
+  { value: "permadeath", label: "Permadeath" },
+  { value: "card", label: "Card" },
+  { value: "battle-royale", label: "Battle Royale" },
+  { value: "mmo", label: "MMO" },
+  { value: "mmofps", label: "MMOFPS" },
+  { value: "mmotps", label: "MMOTPS" },
+  { value: "3d", label: "3D" },
+  { value: "2d", label: "2D" },
+  { value: "anime", label: "Anime" },
+  { value: "fantasy", label: "Fantasy" },
+  { value: "sci-fi", label: "Sci-Fi" },
+  { value: "fighting", label: "Fighting" },
+  { value: "action-rpg", label: "Action RPG" },
+  { value: "action", label: "Action" },
+  { value: "military", label: "Military" },
+  { value: "martial-arts", label: "Martial Arts" },
+  { value: "flight", label: "Flight" },
+  { value: "low-spec", label: "Low Spec" },
+  { value: "tower-defense", label: "Tower Defense" },
+  { value: "horror", label: "Horror" },
+  { value: "mmorts", label: "MMORTS" },
+];
+
+const sortingOptions = [
+  { value: "release-date", label: "Release Date" },
+  { value: "popularity", label: "Popularity" },
+  { value: "alphabetical", label: "Alphabetical" },
+  { value: "relevance", label: "Relevance" },
+];
+
 export function DataTable<TData, TValue>({
   columns,
   data,
+  platformValue,
+  setPlatformValue,
+  genreValue,
+  setGenreValue,
+  sortingValue,
+  setSortingValue,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -36,18 +112,77 @@ export function DataTable<TData, TValue>({
     autoResetPageIndex: false,
   });
 
-  // console.log("table.getState()", table.getState());
-  // const pageSize = table.getState().pagination.pageSize;
-  // console.log("Количество строк на странице:", pageSize);
-  // console.log("data.length", Math.ceil(data.length/50));
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 10,
-  });
   const navigate = useNavigate();
 
   return (
     <div className="rounded-md pt-[100px]">
+      <div className="flex gap-5 my-10">
+        <Select
+          value={platformValue}
+          onValueChange={(value) => {
+            console.log("select value 1", value);
+            setPlatformValue(value);
+          }}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select a platform" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Select a platform</SelectLabel>
+              {platformsOptions.map((item) => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={genreValue}
+          onValueChange={(value) => {
+            console.log("select value 2", value);
+            setGenreValue(value);
+          }}
+        >
+          <SelectTrigger className="w-[280px]">
+            <SelectValue placeholder="Select a category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Select a category</SelectLabel>
+              {genresOptions.map((item) => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={sortingValue}
+          onValueChange={(value) => {
+            console.log("select value 3, value");
+            setSortingValue(value);
+          }}
+        >
+          <SelectTrigger className="w-[280px]">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Sort by</SelectLabel>
+              {sortingOptions.map((item) => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

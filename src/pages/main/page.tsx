@@ -1,10 +1,42 @@
+import { useState } from "react";
+
 import { columns } from "@/app/games/columns";
 import { DataTable } from "@/app/games/data-table";
+
 import { useGamesList } from "@/shared/api/games";
 
 export function MainPage() {
-  const { data, isFetching } = useGamesList();
+  const [platformValue, setPlatformValue] = useState<string>("");
+  const [genreValue, setGenreValue] = useState<string>("");
+  const [sortingValue, setSortingValue] = useState<string>("");
 
-  if (isFetching) return <>Loading...</>;
-  return <DataTable columns={columns} data={data} />;
+  // Запрос с учётом фильтров
+  const { data, isFetching } = useGamesList({
+    platform: platformValue,
+    genre: genreValue,
+    sortBy: sortingValue,
+  });
+
+  if (isFetching) return <h1>Loading...</h1>;
+
+  return (
+    <div>
+      <h1>
+        {platformValue} {genreValue} {sortingValue}
+      </h1>
+      <h1>
+        {platformValue} {genreValue} {sortingValue}
+      </h1>
+      <DataTable
+        columns={columns}
+        data={data}
+        platformValue={platformValue}
+        setPlatformValue={setPlatformValue}
+        genreValue={genreValue}
+        setGenreValue={setGenreValue}
+        sortingValue={sortingValue}
+        setSortingValue={setSortingValue}
+      />
+    </div>
+  );
 }
