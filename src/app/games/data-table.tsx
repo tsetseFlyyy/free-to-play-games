@@ -16,6 +16,8 @@ import {
 } from "@/shared/ui/table";
 import { Button } from "@/shared/ui/button";
 import { useNavigate } from "@tanstack/react-router";
+import { Pagination } from "@/shared/ui/pagination";
+import { useState } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,6 +36,14 @@ export function DataTable<TData, TValue>({
     autoResetPageIndex: false,
   });
 
+  // console.log("table.getState()", table.getState());
+  // const pageSize = table.getState().pagination.pageSize;
+  // console.log("Количество строк на странице:", pageSize);
+  // console.log("data.length", Math.ceil(data.length/50));
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
   const navigate = useNavigate();
 
   return (
@@ -97,24 +107,7 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      <Pagination table={table} />
     </div>
   );
 }

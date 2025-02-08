@@ -3,7 +3,7 @@ import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 export const Route = createRootRoute({
   component: () => (
     <>
-      <header className="flex fixed justify-around w-full bg-black z-10 border-b">
+      <header className="flex fixed justify-around w-full bg-white z-10 border-b">
         <Link
           to="/"
           activeOptions={{ exact: true }}

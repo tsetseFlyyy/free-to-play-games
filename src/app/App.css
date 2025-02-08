@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  /* background-color: black; */
 }
 
 *,
@@ -18,7 +18,7 @@ p,
 span,
 li,
 th {
-  color: white !important;
+  /* color: white !important; */
 }
 
 h1 {

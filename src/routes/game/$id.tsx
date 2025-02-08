@@ -48,7 +48,6 @@ function RouteComponent() {
           </div>
         )}
         <Button onClick={() => addFavorite(data)}>Add to favorites</Button>
-        <Button onClick={() => console.log(favorites)}>Show favorites</Button>
       </div>
       <Carousel
         className="w-full"
