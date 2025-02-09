@@ -65,6 +65,7 @@ export function useGameById(id: number) {
 
       return response.json();
     },
-    placeholderData: keepPreviousData,
+    staleTime: 5 * 60 * 1000, 
+    // cacheTime: 6 * 60 * 1000,
   });
 }
