@@ -3,6 +3,8 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -112,6 +114,7 @@ export function DataTable<TData, TValue>({
   //   "react",
   //   "angular",
   // ]);
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
     data,
@@ -119,6 +122,11 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     autoResetPageIndex: false,
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
 
   const navigate = useNavigate();
@@ -126,8 +134,8 @@ export function DataTable<TData, TValue>({
   console.log(genreValue);
 
   return (
-    <div className="rounded-md pt-[100px]">
-      <div className="flex my-10 justify-between">
+    <div className="rounded-md">
+      <div className="container mx-auto flex my-10 justify-between">
         <div className="flex gap-5">
           <Select
             value={platformValue}
@@ -161,29 +169,6 @@ export function DataTable<TData, TValue>({
             maxCount={3}
           />
 
-          {/* <Select
-            value={genreValue}
-            onValueChange={(value) => {
-              console.log("select value 2", value);
-              setGenreValue(value);
-            }}
-            disabled={isAdvancedFiltersOpen}
-          >
-            <SelectTrigger className="w-[280px]">
-              <SelectValue placeholder="Select a category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Select a category</SelectLabel>
-                {genresOptions.map((item) => (
-                  <SelectItem key={item.value} value={item.value}>
-                    {item.label}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select> */}
-
           <Select
             value={sortingValue}
             onValueChange={(value) => {
@@ -207,7 +192,7 @@ export function DataTable<TData, TValue>({
           </Select>
         </div>
       </div>
-      <Table>
+      <Table className="container mx-auto">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -241,6 +226,7 @@ export function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {cell.column.id === "thumbnail" ? (
                         <img
+                          className="min-h-[206px]"
                           src={cell.getContext().getValue() as string}
                           alt=""
                         />

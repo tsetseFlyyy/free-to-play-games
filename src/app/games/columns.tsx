@@ -1,4 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useStore } from "@/entities/game/lib";
+import { useToast } from "@/hooks/use-toast";
 import { Game } from "@/shared/types/game";
+import { Button } from "@/shared/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<Game>[] = [
@@ -26,5 +30,24 @@ export const columns: ColumnDef<Game>[] = [
   {
     accessorKey: "genre",
     header: "Genre",
+  },
+  {
+    id: "addToFavorites",
+    cell: ({ row }) => {
+      const { addFavorite } = useStore();
+      const { toast } = useToast();
+      return (
+        <Button
+          className="h-8 w-8 p-0"
+          onClick={(event) => {
+            event.stopPropagation();
+            console.log("row.original", row.original);
+            addFavorite(row.original, toast);
+          }}
+        >
+          Add
+        </Button>
+      );
+    },
   },
 ];

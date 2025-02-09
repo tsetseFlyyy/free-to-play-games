@@ -15,7 +15,7 @@ import {
 
 export function Pagination({ table }) {
   return (
-    <div className="flex items-center gap-5 ml-auto w-fit mr-10">
+    <div className="container mx-auto py-8 flex justify-center items-center gap-5">
       <div className="flex items-center gap-2">
         <p>На странице</p>
         <Select
