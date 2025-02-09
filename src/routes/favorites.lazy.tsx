@@ -153,7 +153,7 @@ function Filters({
         maxCount={3}
       />
 
-      <Select
+      {/* <Select
         value={sortingValue}
         onValueChange={(value) => {
           setSortingValue(value);
@@ -176,7 +176,7 @@ function Filters({
             </SelectItem>
           </SelectGroup>
         </SelectContent>
-      </Select>
+      </Select> */}
     </div>
   );
 }
