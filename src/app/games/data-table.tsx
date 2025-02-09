@@ -108,10 +108,10 @@ export function DataTable<TData, TValue>({
   isAdvancedFiltersOpen,
   setIsAdvancedFiltersOpen,
 }: DataTableProps<TData, TValue>) {
-  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([
-    "react",
-    "angular",
-  ]);
+  // const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([
+  //   "react",
+  //   "angular",
+  // ]);
 
   const table = useReactTable({
     data,
@@ -122,6 +122,8 @@ export function DataTable<TData, TValue>({
   });
 
   const navigate = useNavigate();
+
+  console.log(genreValue);
 
   return (
     <div className="rounded-md pt-[100px]">
@@ -151,15 +153,15 @@ export function DataTable<TData, TValue>({
 
           <MultiSelect
             options={genresOptions}
-            onValueChange={setSelectedFrameworks}
-            defaultValue={selectedFrameworks}
+            onValueChange={setGenreValue}
+            defaultValue={genreValue}
             placeholder="Select frameworks"
             variant="inverted"
             animation={2}
             maxCount={3}
           />
 
-          <Select
+          {/* <Select
             value={genreValue}
             onValueChange={(value) => {
               console.log("select value 2", value);
@@ -180,7 +182,7 @@ export function DataTable<TData, TValue>({
                 ))}
               </SelectGroup>
             </SelectContent>
-          </Select>
+          </Select> */}
 
           <Select
             value={sortingValue}
@@ -204,12 +206,6 @@ export function DataTable<TData, TValue>({
             </SelectContent>
           </Select>
         </div>
-        <Button
-          onClick={() => setIsAdvancedFiltersOpen(!isAdvancedFiltersOpen)}
-        >
-          Advanced Filters
-        </Button>
-        <h1>{isAdvancedFiltersOpen ? "true" : "false"}</h1>
       </div>
       <Table>
         <TableHeader>

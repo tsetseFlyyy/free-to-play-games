@@ -10,7 +10,7 @@ export function MainPage() {
     useState<boolean>(false);
 
   const [platformValue, setPlatformValue] = useState<string>("");
-  const [genreValue, setGenreValue] = useState<string>("");
+  const [genreValue, setGenreValue] = useState<string[] | string>("");
   const [sortingValue, setSortingValue] = useState<string>("");
 
   const { data, isFetching } = useGamesList({
