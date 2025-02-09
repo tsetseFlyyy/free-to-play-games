@@ -14,6 +14,10 @@ export const columns: ColumnDef<Game>[] = [
   {
     accessorKey: "release_date",
     header: "Release date",
+    cell: ({ getValue }) => {
+      const date = new Date(getValue() as string);
+      return date.toLocaleDateString("ru-RU"); // Формат DD.MM.YYYY
+    },
   },
   {
     accessorKey: "publisher",

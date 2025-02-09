@@ -3,21 +3,48 @@ import { persist } from "zustand/middleware";
 
 export const useStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       favorites: [],
-      addFavorite: (game) =>
-        set((state) => ({
-          favorites: state.favorites.some((fav) => fav.id === game.id)
-            ? state.favorites
-            : [...state.favorites, game],
-        })),
-      removeFavorite: (id) =>
-        set((state) => ({
-          favorites: state.favorites.filter((fav) => fav.id !== id),
-        })),
+      addFavorite: (game, toast) => {
+        const state = get();
+
+        if (state.favorites.some((fav) => fav.id === game.id)) {
+          toast({
+            title: "Ошибка",
+            description: "Эта игра уже в избранном!",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        const newFavorite = {
+          ...game,
+          addedAt: new Date().toISOString(),
+        };
+
+        set({ favorites: [...state.favorites, newFavorite] });
+
+        toast({
+          title: "Добавлено в избранное",
+          description: `"${game.title}" теперь в вашем списке избранного.`,
+        });
+      },
+      removeFavorite: (id, toast) => {
+        const state = get();
+        const game = state.favorites.find((fav) => fav.id === id);
+
+        if (!game) return;
+
+        set({ favorites: state.favorites.filter((fav) => fav.id !== id) });
+
+        toast({
+          title: "Удалено из избранного",
+          description: `"${game.title}" удалено из списка избранного.`,
+        });
+      },
     }),
     {
-      name: "favorites-storage", // Имя ключа в localStorage
+      name: "favorites-storage",
     }
   )
 );

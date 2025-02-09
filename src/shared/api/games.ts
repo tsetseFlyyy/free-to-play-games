@@ -34,7 +34,7 @@ export function useGamesList({ platform, genre, sortBy }) {
       });
 
       if (!response.ok) {
-        throw new Error("Ошибка при загрузке данных");
+        throw new Error("Не удалось загрузить данные об играх");
       }
 
       return response.json();
@@ -60,7 +60,7 @@ export function useGameById(id: number) {
       );
 
       if (!response.ok) {
-        throw new Error("Ошибка при загрузке данных");
+        throw new Error("Не удалось загрузить данные об игре.");
       }
 
       return response.json();
@@ -68,5 +68,6 @@ export function useGameById(id: number) {
     placeholderData: keepPreviousData,
     staleTime: 5 * 60 * 1000,
     cacheTime: 6 * 60 * 1000,
+    
   });
 }
