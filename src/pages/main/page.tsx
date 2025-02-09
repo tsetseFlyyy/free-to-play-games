@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { columns } from "@/app/games/columns";
 import { DataTable } from "@/app/games/data-table";
 
 import { useGamesList } from "@/shared/api/games";
-import { useToast } from "@/hooks/use-toast";
 
 export function MainPage() {
   const [isAdvancedFiltersOpen, setIsAdvancedFiltersOpen] =
@@ -14,25 +13,22 @@ export function MainPage() {
   const [genreValue, setGenreValue] = useState<string[] | string>("");
   const [sortingValue, setSortingValue] = useState<string>("");
 
-  const { data, isFetching, error } = useGamesList({
+  const { data, isFetching } = useGamesList({
     platform: platformValue,
     genre: genreValue,
     sortBy: sortingValue,
   });
 
-  const { toast } = useToast();
-
-  useEffect(() => {
-    if (error) {
-      toast({
-        title: "Ошибка загрузки",
-        description: error.message,
-        variant: "destructive",
-      });
-    }
-  }, [error, toast]);
-
-  if (isFetching) return <h1>Loading...</h1>;
+  if (isFetching) {
+    return (
+      <div className="container mx-auto flex flex-col gap-4 mt-16">
+        <div className="w-full h-52 animate-pulse rounded-lg bg-gray-200"></div>
+        <div className="w-full h-52 animate-pulse rounded-lg bg-gray-200"></div>
+        <div className="w-full h-52 animate-pulse rounded-lg bg-gray-200"></div>
+        <div className="w-full h-52 animate-pulse rounded-lg bg-gray-200"></div>
+      </div>
+    );
+  }
 
   return (
     <div>

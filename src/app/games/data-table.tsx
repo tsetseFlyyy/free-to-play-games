@@ -30,73 +30,12 @@ import { useNavigate } from "@tanstack/react-router";
 import { Pagination } from "@/shared/ui/pagination";
 import { useState } from "react";
 import { MultiSelect } from "@/shared/ui/multi-select";
+import { genresOptions, platformsOptions, sortingOptions } from "@/shared/constants/options";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
-
-const platformsOptions = [
-  { value: "all", label: "All platforms" },
-  { value: "pc", label: "PC" },
-  { value: "browser", label: "Web Browser" },
-];
-
-const genresOptions = [
-  // { value: "", label: "All genres" },
-  { value: "mmorpg", label: "MMORPG" },
-  { value: "shooter", label: "Shooter" },
-  { value: "strategy", label: "Strategy" },
-  { value: "moba", label: "MOBA" },
-  { value: "racing", label: "Racing" },
-  { value: "sports", label: "Sports" },
-  { value: "social", label: "Social" },
-  { value: "sandbox", label: "Sandbox" },
-  { value: "open-world", label: "Open World" },
-  { value: "survival", label: "Survival" },
-  { value: "pvp", label: "PvP" },
-  { value: "pve", label: "PvE" },
-  { value: "pixel", label: "Pixel" },
-  { value: "voxel", label: "Voxel" },
-  { value: "zombie", label: "Zombie" },
-  { value: "turn-based", label: "Turn-Based" },
-  { value: "first-person", label: "First Person" },
-  { value: "third-person", label: "Third Person" },
-  { value: "top-down", label: "Top Down" },
-  { value: "tank", label: "Tank" },
-  { value: "space", label: "Space" },
-  { value: "sailing", label: "Sailing" },
-  { value: "side-scroller", label: "Side Scroller" },
-  { value: "superhero", label: "Superhero" },
-  { value: "permadeath", label: "Permadeath" },
-  { value: "card", label: "Card" },
-  { value: "battle-royale", label: "Battle Royale" },
-  { value: "mmo", label: "MMO" },
-  { value: "mmofps", label: "MMOFPS" },
-  { value: "mmotps", label: "MMOTPS" },
-  { value: "3d", label: "3D" },
-  { value: "2d", label: "2D" },
-  { value: "anime", label: "Anime" },
-  { value: "fantasy", label: "Fantasy" },
-  { value: "sci-fi", label: "Sci-Fi" },
-  { value: "fighting", label: "Fighting" },
-  { value: "action-rpg", label: "Action RPG" },
-  { value: "action", label: "Action" },
-  { value: "military", label: "Military" },
-  { value: "martial-arts", label: "Martial Arts" },
-  { value: "flight", label: "Flight" },
-  { value: "low-spec", label: "Low Spec" },
-  { value: "tower-defense", label: "Tower Defense" },
-  { value: "horror", label: "Horror" },
-  { value: "mmorts", label: "MMORTS" },
-];
-
-const sortingOptions = [
-  { value: "release-date", label: "Release Date" },
-  { value: "popularity", label: "Popularity" },
-  { value: "alphabetical", label: "Alphabetical" },
-  { value: "relevance", label: "Relevance" },
-];
 
 export function DataTable<TData, TValue>({
   columns,
