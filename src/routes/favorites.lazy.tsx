@@ -37,7 +37,37 @@ function RouteComponent() {
   const [genreValue, setGenreValue] = useState<string[] | string>("");
   const [sortingValue, setSortingValue] = useState<string>("");
 
-  const { favorites: data } = useStore();
+  const { favorites } = useStore();
+
+  favorites.map((item) => {
+    console.log("item.genre", item.genre);
+  });
+
+  const filteredData = favorites
+    ?.filter(
+      (game) =>
+        platformValue === "" ||
+        platformValue === "All platforms" ||
+        game.platform === platformValue
+    )
+    ?.filter((game) =>
+      !genreValue.length ? true : genreValue.includes(game.genre)
+    )
+    ?.sort((a, b) => {
+      if (sortingValue === "alphabetical") {
+        return a.title.localeCompare(b.title);
+      }
+      if (sortingValue === "release_date") {
+        return (
+          new Date(b.release_date).getTime() -
+          new Date(a.release_date).getTime()
+        );
+      }
+      if (sortingValue === "addedAt") {
+        return new Date(b.addedAt).getTime() - new Date(a.addedAt).getTime();
+      }
+      return 0;
+    });
 
   const router = useRouter();
   const onBack = () => router.history.back();
@@ -73,7 +103,7 @@ function RouteComponent() {
           setSortingValue,
         }}
       />
-      <DataTable columns={columns} data={data || []} />
+      <DataTable columns={columns} data={filteredData || []} />
     </>
   );
 }
@@ -86,7 +116,6 @@ function Filters({
   sortingValue,
   setSortingValue,
 }: FiltersProps) {
-  
   console.log("platformValue", platformValue);
   console.log("genreValue", genreValue);
   console.log("sortingValue", sortingValue);
@@ -106,7 +135,7 @@ function Filters({
           <SelectGroup>
             <SelectLabel>Select a platform</SelectLabel>
             {platformsOptions.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
+              <SelectItem key={item.value} value={item.label}>
                 {item.label}
               </SelectItem>
             ))}

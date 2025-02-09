@@ -2,12 +2,11 @@ import { Option } from "@/shared/types/option";
 
 export const platformsOptions: Option[] = [
   { value: "all", label: "All platforms" },
-  { value: "pc", label: "PC" },
+  { value: "pc", label: "PC (Windows)" },
   { value: "browser", label: "Web Browser" },
 ];
 
 export const tagsOptions: Option[] = [
-  // { value: "", label: "All genres" },
   { value: "mmorpg", label: "MMORPG" },
   { value: "shooter", label: "Shooter" },
   { value: "strategy", label: "Strategy" },

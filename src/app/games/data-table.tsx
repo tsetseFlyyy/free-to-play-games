@@ -50,8 +50,6 @@ export function DataTable<TData, TValue>({
   setGenreValue,
   sortingValue,
   setSortingValue,
-  isAdvancedFiltersOpen,
-  setIsAdvancedFiltersOpen,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
