@@ -3,7 +3,6 @@ import { useStore } from "@/entities/game/lib";
 import {
   genresOptions,
   platformsOptions,
-  tagsOptions,
 } from "@/shared/constants/options";
 import { MultiSelect } from "@/shared/ui/multi-select";
 import {
@@ -28,20 +27,13 @@ type FiltersProps = {
   setPlatformValue: (value: string) => void;
   genreValue: string[] | string;
   setGenreValue: (value: string[] | string) => void;
-  sortingValue: string;
-  setSortingValue: (value: string) => void;
 };
 
 function RouteComponent() {
   const [platformValue, setPlatformValue] = useState<string>("");
   const [genreValue, setGenreValue] = useState<string[] | string>("");
-  const [sortingValue, setSortingValue] = useState<string>("");
 
   const { favorites } = useStore();
-
-  favorites.map((item) => {
-    console.log("item.genre", item.genre);
-  });
 
   const filteredData = favorites
     ?.filter(
@@ -52,22 +44,7 @@ function RouteComponent() {
     )
     ?.filter((game) =>
       !genreValue.length ? true : genreValue.includes(game.genre)
-    )
-    ?.sort((a, b) => {
-      if (sortingValue === "alphabetical") {
-        return a.title.localeCompare(b.title);
-      }
-      if (sortingValue === "release_date") {
-        return (
-          new Date(b.release_date).getTime() -
-          new Date(a.release_date).getTime()
-        );
-      }
-      if (sortingValue === "addedAt") {
-        return new Date(b.addedAt).getTime() - new Date(a.addedAt).getTime();
-      }
-      return 0;
-    });
+    );
 
   const router = useRouter();
   const onBack = () => router.history.back();
@@ -99,8 +76,6 @@ function RouteComponent() {
           setPlatformValue,
           genreValue,
           setGenreValue,
-          sortingValue,
-          setSortingValue,
         }}
       />
       <DataTable columns={columns} data={filteredData || []} />
@@ -113,13 +88,7 @@ function Filters({
   setPlatformValue,
   genreValue,
   setGenreValue,
-  sortingValue,
-  setSortingValue,
 }: FiltersProps) {
-  console.log("platformValue", platformValue);
-  console.log("genreValue", genreValue);
-  console.log("sortingValue", sortingValue);
-
   return (
     <div className="container mx-auto flex gap-5">
       <Select
@@ -152,31 +121,6 @@ function Filters({
         animation={2}
         maxCount={3}
       />
-
-      {/* <Select
-        value={sortingValue}
-        onValueChange={(value) => {
-          setSortingValue(value);
-        }}
-      >
-        <SelectTrigger className="w-[280px]">
-          <SelectValue placeholder="Sort by" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Sort by</SelectLabel>
-            <SelectItem key="alphabetical" value="alphabetical">
-              Alphabetical
-            </SelectItem>
-            <SelectItem key="release_date" value="release_date">
-              Release date
-            </SelectItem>
-            <SelectItem key="addedAt" value="addedAt">
-              Added date
-            </SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select> */}
     </div>
   );
 }
