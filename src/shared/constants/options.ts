@@ -1,10 +1,12 @@
-export const platformsOptions = [
+import { Option } from "@/shared/types/option";
+
+export const platformsOptions: Option[] = [
   { value: "all", label: "All platforms" },
   { value: "pc", label: "PC" },
   { value: "browser", label: "Web Browser" },
 ];
 
-export const genresOptions = [
+export const tagsOptions: Option[] = [
   // { value: "", label: "All genres" },
   { value: "mmorpg", label: "MMORPG" },
   { value: "shooter", label: "Shooter" },
@@ -53,7 +55,27 @@ export const genresOptions = [
   { value: "mmorts", label: "MMORTS" },
 ];
 
-export const sortingOptions = [
+export const genresOptions: Option[] = [
+  { value: "MMORPG", label: "MMORPG" },
+  { value: "Shooter", label: "Shooter" },
+  { value: "Strategy", label: "Strategy" },
+  { value: "Action RPG", label: "Action RPG" },
+  { value: "Battle Royale", label: "Battle Royale" },
+  { value: "ARPG", label: "ARPG" },
+  { value: "MMOARPG", label: "MMOARPG" },
+  { value: "Fighting", label: "Fighting" },
+  { value: "MOBA", label: "MOBA" },
+  { value: "Card Game", label: "Card Game" },
+  { value: "Action Game", label: "Action Game" },
+  { value: "Action", label: "Action" },
+  { value: "Sports", label: "Sports" },
+  { value: "MMO", label: "MMO" },
+  { value: "Racing", label: "Racing" },
+  { value: "Social", label: "Social" },
+  { value: "Fantasy", label: "Fantasy" },
+];
+
+export const sortingOptions: Option[] = [
   { value: "release-date", label: "Release Date" },
   { value: "popularity", label: "Popularity" },
   { value: "alphabetical", label: "Alphabetical" },

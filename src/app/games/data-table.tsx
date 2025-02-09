@@ -30,7 +30,11 @@ import { useNavigate } from "@tanstack/react-router";
 import { Pagination } from "@/shared/ui/pagination";
 import { useState } from "react";
 import { MultiSelect } from "@/shared/ui/multi-select";
-import { genresOptions, platformsOptions, sortingOptions } from "@/shared/constants/options";
+import {
+  tagsOptions,
+  platformsOptions,
+  sortingOptions,
+} from "@/shared/constants/options";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -99,7 +103,7 @@ export function DataTable<TData, TValue>({
           </Select>
 
           <MultiSelect
-            options={genresOptions}
+            options={tagsOptions}
             onValueChange={setGenreValue}
             defaultValue={genreValue}
             placeholder="Select tags"
