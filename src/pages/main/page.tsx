@@ -6,11 +6,13 @@ import { DataTable } from "@/app/games/data-table";
 import { useGamesList } from "@/shared/api/games";
 
 export function MainPage() {
+  const [isAdvancedFiltersOpen, setIsAdvancedFiltersOpen] =
+    useState<boolean>(false);
+
   const [platformValue, setPlatformValue] = useState<string>("");
   const [genreValue, setGenreValue] = useState<string>("");
   const [sortingValue, setSortingValue] = useState<string>("");
 
-  // Запрос с учётом фильтров
   const { data, isFetching } = useGamesList({
     platform: platformValue,
     genre: genreValue,
@@ -21,12 +23,6 @@ export function MainPage() {
 
   return (
     <div>
-      <h1>
-        {platformValue} {genreValue} {sortingValue}
-      </h1>
-      <h1>
-        {platformValue} {genreValue} {sortingValue}
-      </h1>
       <DataTable
         columns={columns}
         data={data}
@@ -36,6 +32,8 @@ export function MainPage() {
         setGenreValue={setGenreValue}
         sortingValue={sortingValue}
         setSortingValue={setSortingValue}
+        isAdvancedFiltersOpen={isAdvancedFiltersOpen}
+        setIsAdvancedFiltersOpen={setIsAdvancedFiltersOpen}
       />
     </div>
   );
