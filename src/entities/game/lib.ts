@@ -8,8 +8,6 @@ export const useStore = create(
       addFavorite: (game, toast) => {
         const state = get();
 
-        console.log("game", game);
-
         if (game.platform === "Windows") game.platform = "PC (Windows)";
         if (game.platform === "Browser") game.platform = "Web Browser";
 

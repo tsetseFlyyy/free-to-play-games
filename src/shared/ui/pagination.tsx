@@ -14,12 +14,14 @@ import {
 } from "./select";
 
 export function Pagination({ table }) {
+  const isDisabled = table.getRowModel().rows.length < 1;
+
   return (
     <div className="container mx-auto py-8 flex justify-center items-center gap-5">
       <div className="flex items-center gap-2">
         <p>На странице</p>
         <Select
-          //   value={String(table.getRowModel().rows.length)}
+          value={String(table.getState().pagination.pageSize)}
           onValueChange={(value) => table.setPageSize(value)}
         >
           <SelectTrigger className="w-[180px]">
@@ -35,15 +37,18 @@ export function Pagination({ table }) {
         </Select>
       </div>
       <p>
-        Страница {table.getState().pagination.pageIndex + 1} из{" "}
-        {table.getPageCount()}
+        Страница{" "}
+        {table.getRowModel().rows.length !== 0
+          ? table.getState().pagination.pageIndex + 1
+          : 0}{" "}
+        из {table.getPageCount()}
       </p>
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outline"
           size="sm"
           onClick={() => table.firstPage()}
-          disabled={!table.getCanPreviousPage()}
+          disabled={isDisabled || !table.getCanPreviousPage()}
         >
           <DoubleArrowLeftIcon className="h-4 w-4" />
         </Button>
@@ -51,7 +56,7 @@ export function Pagination({ table }) {
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
+          disabled={isDisabled || !table.getCanPreviousPage()}
         >
           <ChevronLeftIcon className="h-4 w-4" />
         </Button>
