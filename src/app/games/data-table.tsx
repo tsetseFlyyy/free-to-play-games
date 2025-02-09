@@ -155,7 +155,7 @@ export function DataTable<TData, TValue>({
             options={genresOptions}
             onValueChange={setGenreValue}
             defaultValue={genreValue}
-            placeholder="Select frameworks"
+            placeholder="Select tags"
             variant="inverted"
             animation={2}
             maxCount={3}

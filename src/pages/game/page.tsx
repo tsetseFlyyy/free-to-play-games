@@ -1,4 +1,5 @@
 import { useStore } from "@/entities/game/lib";
+import { Route } from "@/routes/game/$id.lazy";
 import { useGameById } from "@/shared/api/games";
 import { Button } from "@/shared/ui/button";
 import {
@@ -8,17 +9,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/shared/ui/carousel";
-import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/game/$id")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+export function GamePage() {
   const { id } = Route.useParams();
   const { data, isFetching } = useGameById(id);
 
-  const { favorites, addFavorite } = useStore();
+  const { addFavorite } = useStore();
 
   if (isFetching) return <h1>Loading...</h1>;
 

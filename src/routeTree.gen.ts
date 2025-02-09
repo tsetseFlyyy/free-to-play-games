@@ -8,32 +8,37 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as FavoritesImport } from './routes/favorites'
-import { Route as IndexImport } from './routes/index'
-import { Route as GameIdImport } from './routes/game/$id'
+
+// Create Virtual Routes
+
+const FavoritesLazyImport = createFileRoute('/favorites')()
+const IndexLazyImport = createFileRoute('/')()
+const GameIdLazyImport = createFileRoute('/game/$id')()
 
 // Create/Update Routes
 
-const FavoritesRoute = FavoritesImport.update({
+const FavoritesLazyRoute = FavoritesLazyImport.update({
   id: '/favorites',
   path: '/favorites',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/favorites.lazy').then((d) => d.Route))
 
-const IndexRoute = IndexImport.update({
+const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const GameIdRoute = GameIdImport.update({
+const GameIdLazyRoute = GameIdLazyImport.update({
   id: '/game/$id',
   path: '/game/$id',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/game/$id.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
@@ -43,21 +48,21 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+      preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/favorites': {
       id: '/favorites'
       path: '/favorites'
       fullPath: '/favorites'
-      preLoaderRoute: typeof FavoritesImport
+      preLoaderRoute: typeof FavoritesLazyImport
       parentRoute: typeof rootRoute
     }
     '/game/$id': {
       id: '/game/$id'
       path: '/game/$id'
       fullPath: '/game/$id'
-      preLoaderRoute: typeof GameIdImport
+      preLoaderRoute: typeof GameIdLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -66,22 +71,22 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/favorites': typeof FavoritesRoute
-  '/game/$id': typeof GameIdRoute
+  '/': typeof IndexLazyRoute
+  '/favorites': typeof FavoritesLazyRoute
+  '/game/$id': typeof GameIdLazyRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/favorites': typeof FavoritesRoute
-  '/game/$id': typeof GameIdRoute
+  '/': typeof IndexLazyRoute
+  '/favorites': typeof FavoritesLazyRoute
+  '/game/$id': typeof GameIdLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/favorites': typeof FavoritesRoute
-  '/game/$id': typeof GameIdRoute
+  '/': typeof IndexLazyRoute
+  '/favorites': typeof FavoritesLazyRoute
+  '/game/$id': typeof GameIdLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -94,15 +99,15 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  FavoritesRoute: typeof FavoritesRoute
-  GameIdRoute: typeof GameIdRoute
+  IndexLazyRoute: typeof IndexLazyRoute
+  FavoritesLazyRoute: typeof FavoritesLazyRoute
+  GameIdLazyRoute: typeof GameIdLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  FavoritesRoute: FavoritesRoute,
-  GameIdRoute: GameIdRoute,
+  IndexLazyRoute: IndexLazyRoute,
+  FavoritesLazyRoute: FavoritesLazyRoute,
+  GameIdLazyRoute: GameIdLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -121,13 +126,13 @@ export const routeTree = rootRoute
       ]
     },
     "/": {
-      "filePath": "index.tsx"
+      "filePath": "index.lazy.tsx"
     },
     "/favorites": {
-      "filePath": "favorites.tsx"
+      "filePath": "favorites.lazy.tsx"
     },
     "/game/$id": {
-      "filePath": "game/$id.tsx"
+      "filePath": "game/$id.lazy.tsx"
     }
   }
 }
