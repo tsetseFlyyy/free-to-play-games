@@ -6,13 +6,9 @@ export function useGamesList({ platform, genre, sortBy }) {
     queryFn: async () => {
       const isFilter: boolean = genre.length > 1;
 
-      console.log(isFilter, "isFilter");
-
       const url = new URL(
         `https://free-to-play-games-database.p.rapidapi.com/api/${isFilter ? "filter" : "games"}`
       );
-
-      console.log("genre", genre);
 
       if (platform) url.searchParams.append("platform", platform);
       if (genre.length === 1) {
@@ -68,6 +64,5 @@ export function useGameById(id: number) {
     placeholderData: keepPreviousData,
     staleTime: 5 * 60 * 1000,
     cacheTime: 6 * 60 * 1000,
-    
   });
 }

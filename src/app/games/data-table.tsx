@@ -53,10 +53,6 @@ export function DataTable<TData, TValue>({
   isAdvancedFiltersOpen,
   setIsAdvancedFiltersOpen,
 }: DataTableProps<TData, TValue>) {
-  // const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([
-  //   "react",
-  //   "angular",
-  // ]);
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
@@ -74,8 +70,6 @@ export function DataTable<TData, TValue>({
 
   const navigate = useNavigate();
 
-  console.log(genreValue);
-
   return (
     <div className="rounded-md">
       <div className="container mx-auto flex my-10 justify-between">
@@ -83,7 +77,6 @@ export function DataTable<TData, TValue>({
           <Select
             value={platformValue}
             onValueChange={(value) => {
-              console.log("select value 1", value);
               setPlatformValue(value);
             }}
           >
@@ -115,7 +108,6 @@ export function DataTable<TData, TValue>({
           <Select
             value={sortingValue}
             onValueChange={(value) => {
-              console.log("select value 3, value");
               setSortingValue(value);
             }}
           >

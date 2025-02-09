@@ -41,7 +41,6 @@ export const columns: ColumnDef<Game>[] = [
           className="h-8 w-8 p-0"
           onClick={(event) => {
             event.stopPropagation();
-            console.log("row.original", row.original);
             addFavorite(row.original, toast);
           }}
         >
