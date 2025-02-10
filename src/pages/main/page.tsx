@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { columns } from "@/app/games/columns";
 import { DataTable } from "@/app/games/data-table";
@@ -19,6 +19,7 @@ import {
 } from "@/shared/constants/options";
 
 import { useGamesList } from "@/shared/api/games";
+import { usePaginationStore } from "@/shared/store/pagination";
 
 type FiltersProps = {
   platformValue: string;
@@ -39,6 +40,12 @@ export function MainPage() {
     genre: genreValue,
     sortBy: sortingValue,
   });
+
+  const { setPageType } = usePaginationStore();
+
+  useEffect(() => {
+    setPageType("allGames");
+  }, []);
 
   if (isFetching) {
     return (

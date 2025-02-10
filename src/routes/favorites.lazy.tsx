@@ -1,9 +1,7 @@
 import { DataTable } from "@/app/games/data-table";
 import { useStore } from "@/entities/game/lib";
-import {
-  genresOptions,
-  platformsOptions,
-} from "@/shared/constants/options";
+import { genresOptions, platformsOptions } from "@/shared/constants/options";
+import { usePaginationStore } from "@/shared/store/pagination";
 import { MultiSelect } from "@/shared/ui/multi-select";
 import {
   Select,
@@ -16,7 +14,7 @@ import {
 } from "@/shared/ui/select";
 import { columns } from "@/widgets/favorites-table/columns";
 import { createLazyFileRoute, useRouter } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Route = createLazyFileRoute("/favorites")({
   component: RouteComponent,
@@ -32,6 +30,12 @@ type FiltersProps = {
 function RouteComponent() {
   const [platformValue, setPlatformValue] = useState<string>("");
   const [genreValue, setGenreValue] = useState<string[] | string>("");
+
+  const { setPageType } = usePaginationStore();
+
+  useEffect(() => {
+    setPageType("favorites");
+  }, []);
 
   const { favorites } = useStore();
 
