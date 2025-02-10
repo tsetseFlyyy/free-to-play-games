@@ -20,6 +20,7 @@ import {
 
 import { useGamesList } from "@/shared/api/games";
 import { usePaginationStore } from "@/shared/store/pagination";
+import { useFiltering } from "@/shared/store/filters";
 
 type FiltersProps = {
   platformValue: string;
@@ -31,9 +32,18 @@ type FiltersProps = {
 };
 
 export function MainPage() {
-  const [platformValue, setPlatformValue] = useState<string>("");
-  const [genreValue, setGenreValue] = useState<string[] | string>("");
-  const [sortingValue, setSortingValue] = useState<string>("");
+  // const [platformValue, setPlatformValue] = useState<string>("");
+  // const [genreValue, setGenreValue] = useState<string[] | string>("");
+  // const [sortingValue, setSortingValue] = useState<string>("");
+
+  const {
+    platformValue,
+    genreValue,
+    sortingValue,
+    setPlatformValue,
+    setGenreValue,
+    setSortingValue,
+  } = useFiltering();
 
   const { data, isFetching } = useGamesList({
     platform: platformValue,
@@ -41,10 +51,13 @@ export function MainPage() {
     sortBy: sortingValue,
   });
 
+  console.log("platformValue", platformValue);
+  console.log("genreValue", genreValue);
+  console.log("sortingValue", sortingValue);
+
   const { setPageType, currentPageType } = usePaginationStore();
 
   useEffect(() => {
-    console.log("allGames");
     setPageType("allGames");
   }, [currentPageType]);
 

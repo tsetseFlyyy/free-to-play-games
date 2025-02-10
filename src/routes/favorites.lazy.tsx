@@ -34,7 +34,6 @@ function RouteComponent() {
   const { setPageType, currentPageType } = usePaginationStore();
 
   useEffect(() => {
-    console.log("favorites");
     setPageType("favorites");
   }, [currentPageType]);
 
