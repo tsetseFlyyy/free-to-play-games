@@ -1,3 +1,4 @@
+import { useToast } from "@/hooks/use-toast";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export function useGamesList({ platform, genre, sortBy }) {
@@ -30,6 +31,7 @@ export function useGamesList({ platform, genre, sortBy }) {
       });
 
       if (!response.ok) {
+     
         throw new Error("Не удалось загрузить данные об играх");
       }
 

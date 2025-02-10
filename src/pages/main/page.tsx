@@ -22,6 +22,7 @@ import { useGamesList } from "@/entities/game/api/games";
 import { usePaginationStore } from "@/shared/store/pagination";
 import { useFiltering } from "@/shared/store/filters";
 import { Loader } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 type FiltersProps = {
   platformValue: string;
@@ -45,13 +46,25 @@ export function MainPage() {
 
   const [selectedValues, setSelectedValues] = useState<string[]>(genreValue);
 
-  const { data, isFetching } = useGamesList({
+  const { data, isFetching, error } = useGamesList({
     platform: platformValue,
     genre: genreValue,
     sortBy: sortingValue,
   });
 
   const { setPageType, currentPageType } = usePaginationStore();
+
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Ошибка загрузки",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  }, [error, toast]);
 
   useEffect(() => {
     setPageTypeFiltering("allGames", setSelectedValues);
@@ -80,7 +93,7 @@ export function MainPage() {
           setSelectedValues,
         }}
       />
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data || []} />
     </div>
   );
 }
