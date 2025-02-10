@@ -73,7 +73,7 @@ export function GamePage() {
               <img
                 className="w-full object-cover rounded-md"
                 src={data.thumbnail}
-                alt=""
+                alt="game image"
               />
             </div>
             <Button onClick={() => addFavorite(data, toast)}>

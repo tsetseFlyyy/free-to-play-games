@@ -91,7 +91,7 @@ export function DataTable<TData, TValue>({
                         <img
                           className="min-h-[206px]"
                           src={cell.getContext().getValue() as string}
-                          alt=""
+                          alt="game image"
                         />
                       ) : (
                         <>
