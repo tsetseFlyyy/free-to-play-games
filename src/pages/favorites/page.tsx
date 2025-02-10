@@ -1,4 +1,4 @@
-import { DataTable } from "@/app/games/data-table";
+import { DataTable } from "@/shared/ui/data-table";
 import { useStore } from "@/entities/game/lib";
 import { genresOptions, platformsOptions } from "@/shared/constants/options";
 import { useFiltering } from "@/shared/store/filters";

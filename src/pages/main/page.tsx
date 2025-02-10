@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { columns } from "@/app/games/columns";
-import { DataTable } from "@/app/games/data-table";
+import { columns } from "@/widgets/home-table/columns";
+import { DataTable } from "@/shared/ui/data-table";
 import {
   Select,
   SelectContent,
