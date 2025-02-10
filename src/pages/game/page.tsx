@@ -136,21 +136,21 @@ export function GamePage() {
         </div>
       </div>
       <Carousel
-        className="flex justify-center items-center gap-16 w-full"
+        className="flex justify-center items-center w-full"
         opts={{
           // loop: true,
           // initialSlide: activeIndex,
 
           // slidesPerView: 2,
-          spaceBetween: 0,
+          // spaceBetween: 0,
           breakpoints: {},
         }}
       >
         <CarouselPrevious />
         <CarouselContent>
           {data.screenshots.map((item) => (
-            <CarouselItem className="basis-1/3 h-[460px]" key={item.id}>
-              <img className="w-full object-cover" src={item.image} alt="" />
+            <CarouselItem className="basis-1/2 h-[500px" key={item.id}>
+              <img className="" src={item.image} alt="" />
             </CarouselItem>
           ))}
         </CarouselContent>
