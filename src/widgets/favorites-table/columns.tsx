@@ -96,13 +96,12 @@ export const columns: ColumnDef<Game>[] = [
       const { toast } = useToast();
       return (
         <Button
-          className="h-8 w-8 p-0"
           onClick={(event) => {
             event.stopPropagation();
             removeFavorite(row.original.id as number, toast);
           }}
         >
-          Remove
+          Remove from fav
         </Button>
       );
     },
