@@ -18,7 +18,7 @@ import {
   sortingOptions,
 } from "@/shared/constants/options";
 
-import { useGamesList } from "@/shared/api/games";
+import { useGamesList } from "@/entities/game/api/games";
 import { usePaginationStore } from "@/shared/store/pagination";
 import { useFiltering } from "@/shared/store/filters";
 

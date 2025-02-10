@@ -1,28 +1,28 @@
-import { useStore } from '@/entities/game/lib'
-import { GamePage } from '@/pages/game/page'
-import { useGameById } from '@/shared/api/games'
-import { Button } from '@/shared/ui/button'
+import { useStore } from "@/entities/game/store/store";
+import { GamePage } from "@/pages/game/page";
+import { useGameById } from "@/entities/game/api/games";
+import { Button } from "@/shared/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/shared/ui/carousel'
-import { createFileRoute, lazyRouteComponent } from '@tanstack/react-router'
-import React from 'react'
+} from "@/shared/ui/carousel";
+import { createFileRoute, lazyRouteComponent } from "@tanstack/react-router";
+import React from "react";
 
-export const Route = createFileRoute('/game/$id')({
-  component: React.lazy(() => import('@/pages/game')),
-})
+export const Route = createFileRoute("/game/$id")({
+  component: React.lazy(() => import("@/pages/game")),
+});
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data, isFetching } = useGameById(id)
+  const { id } = Route.useParams();
+  const { data, isFetching } = useGameById(id);
 
-  const { addFavorite } = useStore()
+  const { addFavorite } = useStore();
 
-  if (isFetching) return <h1>Loading...</h1>
+  if (isFetching) return <h1>Loading...</h1>;
 
   return (
     <div className="py-[150px]">
@@ -72,5 +72,5 @@ function RouteComponent() {
         <CarouselNext />
       </Carousel>
     </div>
-  )
+  );
 }

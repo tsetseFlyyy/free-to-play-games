@@ -1,7 +1,7 @@
-import { useStore } from "@/entities/game/lib";
+import { useStore } from "@/entities/game/store/store";
 import { useToast } from "@/hooks/use-toast";
 import { Route } from "@/routes/game/$id";
-import { useGameById } from "@/shared/api/games";
+import { useGameById } from "@/entities/game/api/games";
 import { Button } from "@/shared/ui/button";
 import {
   Carousel,
@@ -77,7 +77,9 @@ export function GamePage() {
                 alt=""
               />
             </div>
-            <Button onClick={() => addFavorite(data, toast)}>Add to favorites</Button>
+            <Button onClick={() => addFavorite(data, toast)}>
+              Add to favorites
+            </Button>
           </aside>
           <div>
             <h1 className="text-6xl font-bold">{data.title}</h1>

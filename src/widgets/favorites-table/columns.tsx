@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useStore } from "@/entities/game/lib";
+import { useStore } from "@/entities/game/store/store";
 import { useToast } from "@/hooks/use-toast";
-import { Game } from "@/shared/types/game";
+import { Game } from "@/entities/game/model/types";
 import { Button } from "@/shared/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";

@@ -1,5 +1,5 @@
 import { DataTable } from "@/shared/ui/data-table";
-import { useStore } from "@/entities/game/lib";
+import { useStore } from "@/entities/game/store/store";
 import { genresOptions, platformsOptions } from "@/shared/constants/options";
 import { useFiltering } from "@/shared/store/filters";
 import { usePaginationStore } from "@/shared/store/pagination";
