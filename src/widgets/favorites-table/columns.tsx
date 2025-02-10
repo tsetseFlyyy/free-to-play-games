@@ -17,13 +17,13 @@ export const columns: ColumnDef<Game>[] = [
     accessorKey: "title",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
+        <span
+          className="flex items-center"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Title
           <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        </span>
       );
     },
   },
@@ -31,13 +31,13 @@ export const columns: ColumnDef<Game>[] = [
     accessorKey: "release_date",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
+        <span
+          className="flex items-center"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Release date
           <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        </span>
       );
     },
     cell: ({ getValue }) => {
@@ -48,13 +48,13 @@ export const columns: ColumnDef<Game>[] = [
     accessorKey: "publisher",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
+       <span
+          className="flex items-center"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Publisher
           <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        </span>
       );
     },
   },
@@ -62,13 +62,13 @@ export const columns: ColumnDef<Game>[] = [
     accessorKey: "genre",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
+        <span
+          className="flex items-center"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Genre
           <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        </span>
       );
     },
   },
@@ -76,13 +76,13 @@ export const columns: ColumnDef<Game>[] = [
     accessorKey: "addedAt",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
+       <span
+          className="flex items-center"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Added date
           <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        </span>
       );
     },
     cell: ({ getValue }) => {
@@ -91,6 +91,7 @@ export const columns: ColumnDef<Game>[] = [
   },
   {
     id: "removeFromFavorites",
+    header: 'Action',
     cell: ({ row }) => {
       const { removeFavorite } = useStore();
       const { toast } = useToast();
