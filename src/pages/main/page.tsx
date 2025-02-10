@@ -21,6 +21,7 @@ import {
 import { useGamesList } from "@/entities/game/api/games";
 import { usePaginationStore } from "@/shared/store/pagination";
 import { useFiltering } from "@/shared/store/filters";
+import { Loader } from "lucide-react";
 
 type FiltersProps = {
   platformValue: string;
@@ -59,11 +60,8 @@ export function MainPage() {
 
   if (isFetching) {
     return (
-      <div className="container mx-auto flex flex-col gap-4 mt-16">
-        <div className="w-full h-52 animate-pulse rounded-lg bg-gray-200"></div>
-        <div className="w-full h-52 animate-pulse rounded-lg bg-gray-200"></div>
-        <div className="w-full h-52 animate-pulse rounded-lg bg-gray-200"></div>
-        <div className="w-full h-52 animate-pulse rounded-lg bg-gray-200"></div>
+      <div className="h-screen flex items-center justify-center">
+        <Loader />
       </div>
     );
   }
