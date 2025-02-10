@@ -10,10 +10,8 @@
   box-sizing: border-box;
 }
 
-
 @layer base {
   :root {
-
     --background: 0 0% 100%;
 
     --foreground: 240 10% 3.9%;
@@ -62,10 +60,9 @@
 
     --chart-5: 27 87% 67%;
 
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
   .dark {
-
     --background: 240 10% 3.9%;
 
     --foreground: 0 0% 98%;
@@ -112,7 +109,7 @@
 
     --chart-4: 280 65% 60%;
 
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
   }
 }
 
@@ -123,4 +120,48 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.gamesList th:first-child {
+  width: 400px;
+}
+
+.gamesList th:nth-child(2) {
+  width: 270px;
+}
+
+.gamesList th:nth-child(3) {
+  width: 200px;
+}
+
+.gamesList th:nth-child(4) {
+  width: 180px;
+}
+
+.gamesList th:nth-child(5) {
+  width: 180px;
+}
+
+.favorites th:first-child {
+  width: 400px;
+}
+
+.favorites th:nth-child(2) {
+  width: 250px;
+}
+
+.favorites th:nth-child(3) {
+  width: 200px;
+}
+
+.favorites th:nth-child(4) {
+  width: 180px;
+}
+
+.favorites th:nth-child(5) {
+  width: 150px;
+}
+
+.favorites th:nth-child(6) {
+  width: 170px;
 }

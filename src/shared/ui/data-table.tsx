@@ -20,6 +20,7 @@ import {
 import { useNavigate } from "@tanstack/react-router";
 import { Pagination } from "@/shared/ui/pagination";
 import { useState } from "react";
+import { usePaginationStore } from "../store/pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +32,9 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const { currentPageType } = usePaginationStore();
+
+  console.log("currentPageType", currentPageType);
 
   const table = useReactTable({
     data,
@@ -48,8 +52,10 @@ export function DataTable<TData, TValue>({
   const navigate = useNavigate();
 
   return (
-    <div className="rounded-md">
-      <Table className="container mx-auto">
+    <div
+      className={`rounded-md ${currentPageType === "allGames" ? "gamesList" : "favorites"}`}
+    >
+      <Table className="container mx-auto currentPageType">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

@@ -44,7 +44,6 @@ export function FavoritesPage() {
     setPageType("favorites");
   }, [currentPageType]);
 
-  console.log("genreValue", genreValue);
 
   const { favorites } = useStore();
 
