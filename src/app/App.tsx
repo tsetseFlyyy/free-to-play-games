@@ -1,16 +1,14 @@
 import "./App.css";
 import { routeTree } from "@/routeTree.gen";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { Loader } from "lucide-react";
 
 const router = createRouter({
   routeTree,
   defaultPendingComponent: () => (
-    <>
-      <h1 className="text-center text-red-600">LOADING....</h1>
-      <h1 className="text-center text-red-600">LOADING....</h1>
-      <h1 className="text-center text-red-600">LOADING....</h1>
-      <h1 className="text-center text-red-600">LOADING....</h1>
-    </>
+    <div className="h-screen flex items-center justify-center">
+      <Loader />
+    </div>
   ),
   defaultPendingMinMs: 0,
   defaultPendingMs: 0,

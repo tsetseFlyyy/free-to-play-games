@@ -13,6 +13,7 @@ import {
 import { useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { formatDate } from "@/shared/lib/utils";
+import { Loader } from "lucide-react";
 
 export function GamePage() {
   const { id } = Route.useParams();
@@ -37,14 +38,9 @@ export function GamePage() {
 
   if (isFetching)
     return (
-      <>
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
-      </>
+      <div className="h-screen flex items-center justify-center">
+        <Loader />
+      </div>
     );
 
   if (!data) return <h1>Игра не найдена</h1>;
