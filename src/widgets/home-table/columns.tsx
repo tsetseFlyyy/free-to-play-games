@@ -4,6 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Game } from "@/entities/game/model/types";
 import { Button } from "@/shared/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
+import { formatDate } from "@/shared/lib/utils";
 
 export const columns: ColumnDef<Game>[] = [
   {
@@ -19,8 +20,7 @@ export const columns: ColumnDef<Game>[] = [
     accessorKey: "release_date",
     header: "Release date",
     cell: ({ getValue }) => {
-      const date = new Date(getValue() as string);
-      return date.toLocaleDateString("ru-RU"); // Формат DD.MM.YYYY
+      return formatDate(getValue() as string, false);
     },
   },
   {

@@ -5,6 +5,7 @@ import { Game } from "@/entities/game/model/types";
 import { Button } from "@/shared/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import { formatDate } from "@/shared/lib/utils";
 
 export const columns: ColumnDef<Game>[] = [
   {
@@ -40,8 +41,7 @@ export const columns: ColumnDef<Game>[] = [
       );
     },
     cell: ({ getValue }) => {
-      const date = new Date(getValue() as string);
-      return date.toLocaleDateString("ru-RU");
+      return formatDate(getValue() as string, false);
     },
   },
   {
@@ -86,13 +86,7 @@ export const columns: ColumnDef<Game>[] = [
       );
     },
     cell: ({ getValue }) => {
-      const date = new Date(getValue() as string);
-      const formattedDate = date.toLocaleDateString("ru-RU");
-      const formattedTime = date.toLocaleTimeString("ru-RU", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-      return `${formattedDate}, ${formattedTime}`;
+      return formatDate(getValue() as string, true);
     },
   },
   {

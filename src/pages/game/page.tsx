@@ -12,6 +12,7 @@ import {
 } from "@/shared/ui/carousel";
 import { useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { formatDate } from "@/shared/lib/utils";
 
 export function GamePage() {
   const { id } = Route.useParams();
@@ -47,6 +48,8 @@ export function GamePage() {
     );
 
   if (!data) return <h1>Игра не найдена</h1>;
+
+  const date = formatDate(data.release_date, false);
 
   return (
     <div className="py-10">
@@ -84,13 +87,10 @@ export function GamePage() {
           <div>
             <h1 className="text-6xl font-bold">{data.title}</h1>
             <section className="flex flex-col mt-6">
-              <h2></h2>
               <div className="flex flex-col gap-1">
                 <div className="flex gap-2">
                   <span className="w-28 text-base">Release date:</span>
-                  <h3 className="text-base">
-                    {new Date(data.release_date).toLocaleDateString("ru-RU")}
-                  </h3>
+                  <h3 className="text-base">{date}</h3>
                 </div>
                 <div className="flex gap-2">
                   <span className="w-28 text-base">Publisher:</span>
