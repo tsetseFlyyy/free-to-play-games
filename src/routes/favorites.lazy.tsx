@@ -1,7 +1,9 @@
 import { DataTable } from "@/app/games/data-table";
 import { useStore } from "@/entities/game/lib";
 import { genresOptions, platformsOptions } from "@/shared/constants/options";
+import { useFiltering } from "@/shared/store/filters";
 import { usePaginationStore } from "@/shared/store/pagination";
+import { Button } from "@/shared/ui/button";
 import { MultiSelect } from "@/shared/ui/multi-select";
 import {
   Select,
@@ -28,14 +30,28 @@ type FiltersProps = {
 };
 
 function RouteComponent() {
-  const [platformValue, setPlatformValue] = useState<string>("");
-  const [genreValue, setGenreValue] = useState<string[] | string>("");
+  // const [platformValue, setPlatformValue] = useState<string>("");
+  // const [genreValue, setGenreValue] = useState<string[] | string>("");
+
+  const {
+    platformValue,
+    genreValue,
+    setPlatformValue,
+    setGenreValue,
+    setPageType: setPageTypeFiltering,
+  } = useFiltering();
+
+  const [selectedValues, setSelectedValues] = useState<string[]>(genreValue);
+
 
   const { setPageType, currentPageType } = usePaginationStore();
 
   useEffect(() => {
+    setPageTypeFiltering("favorites", setSelectedValues);
     setPageType("favorites");
   }, [currentPageType]);
+
+  console.log("genreValue", genreValue);
 
   const { favorites } = useStore();
 
@@ -80,6 +96,8 @@ function RouteComponent() {
           setPlatformValue,
           genreValue,
           setGenreValue,
+          selectedValues,
+          setSelectedValues
         }}
       />
       <DataTable columns={columns} data={filteredData || []} />
@@ -92,7 +110,10 @@ function Filters({
   setPlatformValue,
   genreValue,
   setGenreValue,
+  selectedValues,
+  setSelectedValues
 }: FiltersProps) {
+
   return (
     <div className="container mx-auto flex gap-5">
       <Select
@@ -120,11 +141,22 @@ function Filters({
         options={genresOptions}
         onValueChange={setGenreValue}
         defaultValue={genreValue}
+        selectedValues={selectedValues}
+        setSelectedValues={setSelectedValues}
         placeholder="Select tags"
         variant="inverted"
         animation={2}
         maxCount={3}
       />
+
+      <Button
+        onClick={() => {
+          setSelectedValues([]);
+          setGenreValue([]);
+        }}
+      >
+        CLICK
+      </Button>
     </div>
   );
 }

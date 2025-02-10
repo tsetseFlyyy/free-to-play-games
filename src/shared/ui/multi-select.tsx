@@ -14,11 +14,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/shared/ui/separator";
 import { Button } from "@/shared/ui/button";
 import { Badge } from "@/shared/ui/badge";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/shared/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import {
   Command,
   CommandEmpty,
@@ -129,6 +125,8 @@ export const MultiSelect = React.forwardRef<
       onValueChange,
       variant,
       defaultValue = [],
+      selectedValues,
+      setSelectedValues,
       placeholder = "Select options",
       animation = 0,
       maxCount = 3,
@@ -139,8 +137,9 @@ export const MultiSelect = React.forwardRef<
     },
     ref
   ) => {
-    const [selectedValues, setSelectedValues] =
-      React.useState<string[]>(defaultValue);
+    // const [selectedValues, setSelectedValues] =
+    //   React.useState<string[]>(defaultValue);
+    setSelectedValues(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(false);
 

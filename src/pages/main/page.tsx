@@ -32,10 +32,6 @@ type FiltersProps = {
 };
 
 export function MainPage() {
-  // const [platformValue, setPlatformValue] = useState<string>("");
-  // const [genreValue, setGenreValue] = useState<string[] | string>("");
-  // const [sortingValue, setSortingValue] = useState<string>("");
-
   const {
     platformValue,
     genreValue,
@@ -43,7 +39,10 @@ export function MainPage() {
     setPlatformValue,
     setGenreValue,
     setSortingValue,
+    setPageType: setPageTypeFiltering,
   } = useFiltering();
+
+  const [selectedValues, setSelectedValues] = useState<string[]>(genreValue);
 
   const { data, isFetching } = useGamesList({
     platform: platformValue,
@@ -51,13 +50,10 @@ export function MainPage() {
     sortBy: sortingValue,
   });
 
-  console.log("platformValue", platformValue);
-  console.log("genreValue", genreValue);
-  console.log("sortingValue", sortingValue);
-
   const { setPageType, currentPageType } = usePaginationStore();
 
   useEffect(() => {
+    setPageTypeFiltering("allGames", setSelectedValues);
     setPageType("allGames");
   }, [currentPageType]);
 
@@ -82,6 +78,8 @@ export function MainPage() {
           setGenreValue,
           sortingValue,
           setSortingValue,
+          selectedValues,
+          setSelectedValues,
         }}
       />
       <DataTable columns={columns} data={data} />
@@ -96,6 +94,8 @@ function Filters({
   setGenreValue,
   sortingValue,
   setSortingValue,
+  selectedValues,
+  setSelectedValues,
 }: FiltersProps) {
   return (
     <div className="container mx-auto flex my-10 justify-between">
@@ -125,6 +125,8 @@ function Filters({
           options={tagsOptions}
           onValueChange={setGenreValue}
           defaultValue={genreValue}
+          selectedValues={selectedValues}
+          setSelectedValues={setSelectedValues}
           placeholder="Select tags"
           variant="inverted"
           animation={2}
