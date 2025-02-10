@@ -107,39 +107,41 @@ function Filters({
   setSelectedValues,
 }: FiltersProps) {
   return (
-    <div className="container mx-auto flex gap-5">
-      <Select
-        value={platformValue}
-        onValueChange={(value) => {
-          setPlatformValue(value);
-        }}
-      >
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a platform" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Select a platform</SelectLabel>
-            {platformsOptions.map((item) => (
-              <SelectItem key={item.value} value={item.label}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+    <div className="container mx-auto flex mb-5 justify-between">
+      <div className="flex gap-5">
+        <Select
+          value={platformValue}
+          onValueChange={(value) => {
+            setPlatformValue(value);
+          }}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select a platform" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Select a platform</SelectLabel>
+              {platformsOptions.map((item) => (
+                <SelectItem key={item.value} value={item.label}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
-      <MultiSelect
-        options={genresOptions}
-        onValueChange={setGenreValue}
-        defaultValue={genreValue}
-        selectedValues={selectedValues}
-        setSelectedValues={setSelectedValues}
-        placeholder="Select tags"
-        variant="inverted"
-        animation={2}
-        maxCount={3}
-      />
+        <MultiSelect
+          options={genresOptions}
+          onValueChange={setGenreValue}
+          defaultValue={genreValue}
+          selectedValues={selectedValues}
+          setSelectedValues={setSelectedValues}
+          placeholder="Select tags"
+          variant="inverted"
+          animation={2}
+          maxCount={3}
+        />
+      </div>
     </div>
   );
 }
