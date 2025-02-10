@@ -31,11 +31,12 @@ function RouteComponent() {
   const [platformValue, setPlatformValue] = useState<string>("");
   const [genreValue, setGenreValue] = useState<string[] | string>("");
 
-  const { setPageType } = usePaginationStore();
+  const { setPageType, currentPageType } = usePaginationStore();
 
   useEffect(() => {
+    console.log("favorites");
     setPageType("favorites");
-  }, []);
+  }, [currentPageType]);
 
   const { favorites } = useStore();
 

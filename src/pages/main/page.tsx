@@ -41,11 +41,12 @@ export function MainPage() {
     sortBy: sortingValue,
   });
 
-  const { setPageType } = usePaginationStore();
+  const { setPageType, currentPageType } = usePaginationStore();
 
   useEffect(() => {
+    console.log("allGames");
     setPageType("allGames");
-  }, []);
+  }, [currentPageType]);
 
   if (isFetching) {
     return (

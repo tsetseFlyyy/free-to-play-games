@@ -19,5 +19,10 @@ export const usePaginationStore = create<PaginationStore>()((set) => ({
     set((state) =>
       state.currentPageType === type ? { currentPage: currentNum } : {}
     ),
-  setPageType: (type) => set({ currentPageType: type }),
+  setPageType: (type) =>
+    set((state) =>
+      state.currentPageType !== type
+        ? { currentPageType: type, pageSize: 10, currentPage: 1 }
+        : state
+    ),
 }));
