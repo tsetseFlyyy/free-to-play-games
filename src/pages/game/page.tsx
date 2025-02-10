@@ -131,17 +131,19 @@ export function GamePage() {
           </div>
         </div>
       </div>
-      <Carousel className="flex justify-center items-center w-full">
-        <CarouselPrevious />
-        <CarouselContent>
-          {data.screenshots.map((item) => (
-            <CarouselItem className="basis-1/2" key={item.id}>
-              <img className="" src={item.image} alt="" />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselNext />
-      </Carousel>
+      {data.screenshots.length > 0 && (
+        <Carousel className="flex justify-center items-center w-full">
+          <CarouselPrevious />
+          <CarouselContent>
+            {data.screenshots.map((item) => (
+              <CarouselItem className="basis-1/2" key={item.id}>
+                <img className="" src={item.image} alt="" />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselNext />
+        </Carousel>
+      )}
     </div>
   );
 }
