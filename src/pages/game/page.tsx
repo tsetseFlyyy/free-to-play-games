@@ -22,7 +22,7 @@ export function GamePage() {
   const { addFavorite } = useStore();
 
   const router = useRouter();
-  const onBack = () => router.history.back();
+  const onGamesList = () => router.navigate({ to: "/" });
 
   const { toast } = useToast();
 
@@ -43,14 +43,19 @@ export function GamePage() {
       </div>
     );
 
-  if (!data) return <h1>Игра не найдена</h1>;
+  if (!data)
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <h1 className="text-red-600">Ошибка: Игра не найдена</h1>
+      </div>
+    );
 
   const date = formatDate(data.release_date, false);
 
   return (
     <div className="py-10">
       <div className="container mx-auto mb-[100px]">
-        <button onClick={onBack} className="flex items-center gap-1">
+        <button onClick={onGamesList} className="flex items-center gap-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

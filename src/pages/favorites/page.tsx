@@ -44,7 +44,6 @@ export function FavoritesPage() {
     setPageType("favorites");
   }, [currentPageType]);
 
-
   const { favorites } = useStore();
 
   const filteredData = favorites
@@ -59,12 +58,12 @@ export function FavoritesPage() {
     );
 
   const router = useRouter();
-  const onBack = () => router.history.back();
+  const onGamesList = () => router.navigate({ to: "/" });
 
   return (
     <>
       <div className="container mx-auto">
-        <button onClick={onBack} className="flex items-center gap-1 py-6">
+        <button onClick={onGamesList} className="flex items-center gap-1 py-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
